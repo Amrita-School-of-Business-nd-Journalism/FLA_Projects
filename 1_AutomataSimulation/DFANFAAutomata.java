@@ -96,6 +96,7 @@ public class DFANFAAutomata{
         }
         //Common thigns over 
 
+        System.out.println("For DFA things: ");
         // DFA inputs
         Map<String, String> DFAtransitions = new HashMap<>();
         System.out.print("Enter number of transitions: ");
@@ -105,7 +106,7 @@ public class DFANFAAutomata{
             String DFAstate1 = scanner.nextLine();
             System.out.print(i+1 + " Enter state -2: ");
             String DFAstate2 = scanner.nextLine();
-            System.out.print(i+1 + " Enter transition: ");
+            System.out.print(i+1 + " Enter transition Symbol: ");
             String DFAtsym = scanner.nextLine();
             DFAtransitions.put(DFAstate1 + "," + DFAtsym, DFAstate2);
         }
@@ -113,20 +114,21 @@ public class DFANFAAutomata{
         OverallThings DFAobj = new DFA(initialState,finalStates,DFAtransitions);
 
         // NFA inputs
+        System.out.println("For NFA things: ");
         Map<String, Vector<String>> NFAtransitions = new HashMap<>();
         System.out.print("Enter number of transitions: ");
         int NFAtemp1 = Integer.parseInt(scanner.nextLine());
         for(int i=0;i<NFAtemp1;i++){
             System.out.print(i+1 + " Enter state -1: ");
             String NFAstate1 = scanner.nextLine();
-            System.out.print(i+1 + " Enter transition: ");
+            System.out.print(i+1 + " Enter transition Symbol: ");
             String NFAtsym = scanner.nextLine();
             
             System.out.println("Enter the number of state(s) it can transistion to: ");
             int NFAtemp2 = Integer.parseInt(scanner.nextLine());
             Vector<String> tostatestemp = new Vector<>();
             for(int j=0;j<NFAtemp2;j++){
-                System.out.print(j+1 + "Enter the state: ");
+                System.out.print(j+1 + " Enter the state to which it can transition: ");
                 tostatestemp.add(scanner.nextLine());
             }
 
