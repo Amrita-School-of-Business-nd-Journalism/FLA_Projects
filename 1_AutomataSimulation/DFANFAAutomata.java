@@ -138,13 +138,16 @@ public class DFANFAAutomata{
         OverallThings NFAobj = new NFA(initialState,finalStates,NFAtransitions);
 
         // Input string
-
-        System.out.print("Enter the string to be checked: ");
-        String inputStr = scanner.nextLine();
-
-        // Calling and printing the output
-        System.out.println("DFA result is: " + DFAobj.FAcompute(inputStr));
-        System.out.println("NFA result is: " +  NFAobj.FAcompute(inputStr));
+        while(true){
+            System.out.print("Enter the string to be checked: ");
+            String inputStr = scanner.nextLine();
+            if (inputStr.equals("exit")){
+                break;
+            }
+            // Calling and printing the output
+            System.out.println("DFA result is: " + DFAobj.FAcompute(inputStr));
+            System.out.println("NFA result is: " +  NFAobj.FAcompute(inputStr));
+        }
+        scanner.close();
     }
-
 }
