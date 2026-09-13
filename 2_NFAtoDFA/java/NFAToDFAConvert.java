@@ -9,6 +9,9 @@ import java.util.Set;
 public class NFAToDFAConvert {
     public static Map<Set<String>,Map<String,Set<String>>> nfatodfa(String nfaStartState,Map<String,Map<String,Set<String>>> 
         nfaTransitions,Set<String> tsym){
+        if (nfaStartState == null || nfaTransitions == null || tsym == null) {
+            throw new IllegalArgumentException("Invalid input (null), input correct things");
+        }
         Deque<Set<String>> temp = new ArrayDeque<>();
         Set<Set<String>> visited = new HashSet<>();
         Map<Set<String>,Map<String,Set<String>>> dfaTransitions = new HashMap<>();
@@ -41,24 +44,24 @@ public class NFAToDFAConvert {
     public static void printDFA(String initialState, Map<Set<String>,Map<String,Set<String>>> dfaTransitions, Set<String> finalStates){
         System.out.println("DFA Transitions:");
 
-        System.out.println("Starting State: " + initialState);
+        System.out.println("Starting State: [" + initialState + "]");
 
         Set<Set<String>> dfaFinalStates = new HashSet<>();
 
         for (Set<String> state : dfaTransitions.keySet()){
+            boolean isFinal = false;
+            for (String s : state){
+                if (finalStates.contains(s)){
+                    isFinal = true;
+                    break;
+                }
+            }
+            if (isFinal){
+                dfaFinalStates.add(state);
+            }
+
             for (String symbol : dfaTransitions.get(state).keySet()){
                 System.out.println(state + " --" + symbol + "--> " + dfaTransitions.get(state).get(symbol));
-                
-                boolean isFinal = false;
-                for (String s : state){
-                    if (finalStates.contains(s)){
-                        isFinal = true;
-                        break;
-                    }
-                }
-                if (isFinal){
-                    dfaFinalStates.add(state);
-                }
             }
         }
 

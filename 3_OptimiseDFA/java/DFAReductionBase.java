@@ -2,6 +2,7 @@ import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Queue;
@@ -23,6 +24,11 @@ public class DFAReductionBase {
     }
 
     public static ReducedDFA DFAReduction(String initialState,Set<String> finalStates,Set<String> states,Map<String,Map<String,String>> transitions,Set<String> tsym){
+        if (initialState == null || finalStates == null || states == null || transitions == null || tsym == null) {
+            throw new IllegalArgumentException("Invalid input (null), input correct things");
+        }
+
+        states.add(initialState);
         Set<String> reachableStates = new HashSet<>();
         Queue<String> temp = new ArrayDeque<>();
         temp.add(initialState);
@@ -122,7 +128,9 @@ public class DFAReductionBase {
         Set<String> reducedInitialState =groupMap.get(initialState);
         Set<Set<String>> reducedFinalStates = new HashSet<>();
         for(String state : finalStates){
-            reducedFinalStates.add(groupMap.get(state));
+            if(groupMap.containsKey(state)){
+                reducedFinalStates.add(groupMap.get(state));
+            }
         }
         Map<Set<String>,Map<String,Set<String>>> reducedTransitions = new HashMap<>();
         for(String state : transitions.keySet()){
@@ -141,17 +149,13 @@ public class DFAReductionBase {
     public static void printDFA(Set<String> Startstate,Map<Set<String>,Map<String,Set<String>>> Transitions,Set<Set<String>> FinalStates){
         System.out.println("DFA Transitions:");
         System.out.println("Starting State: " + Startstate);
-        Set<Set<String>> tempfinal = new HashSet<>();
         for(Set<String> state : Transitions.keySet()){
             for(String symbol : Transitions.get(state).keySet()){
                 System.out.println(state + " --" + symbol + "--> "+ Transitions.get(state).get(symbol));
-                if(FinalStates.contains(state)){
-                    tempfinal.add(state);
-                }
             }
         }
         System.out.println("DFA Final States:");
-        for(Set<String> state : tempfinal){
+        for(Set<String> state : FinalStates){
             System.out.println(state);
         }
     }

@@ -11,6 +11,9 @@ public class DFA extends OverallThings{
 
     @Override
     public boolean FAcompute(String inputString){
+        if (inputString == null||this.initialState == null||this.finalStates == null||this.transitions == null) {
+            return false;
+        }
         String currentState = this.initialState;
 
         for (int i = 0; i<inputString.length();i++){

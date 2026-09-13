@@ -22,6 +22,11 @@ public class IntersectionDFABase {
     public static IntersectionResult intersectionDFA(String initialState1, Set<String> finalState1,Map<String, Map<String, String>> transitions1,
             String initialState2, Set<String> finalState2,Map<String, Map<String, String>> transitions2,Set<String> tsym) {
 
+        if (initialState1 == null || finalState1 == null || transitions1 == null ||
+            initialState2 == null || finalState2 == null || transitions2 == null || tsym == null) {
+                throw new IllegalArgumentException("Invalid input (null), input correct things");
+        }
+
         String initialState = initialState1 + "," + initialState2;
         Set<String> finalStates = new HashSet<>();
         Map<String, Map<String, String>> transitions = new HashMap<>();

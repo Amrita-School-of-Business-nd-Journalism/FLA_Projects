@@ -13,11 +13,17 @@ public class NFA extends OverallThings{
 
     @Override
     public boolean FAcompute(String inputStr){
+        if (inputStr == null||this.initialState == null||this.finalStates == null||this.transitions == null) {
+            return false;
+        }
         return callNFABT(0,inputStr,this.initialState);
     }
 
     public boolean callNFABT(int idx,String inputStr,String currentState){
-        if (idx == inputStr.length()) {
+        if (currentState == null){
+            return false;
+        }
+        if (idx == inputStr.length()){
             return this.finalStates.contains(currentState);
         }
 
@@ -25,10 +31,12 @@ public class NFA extends OverallThings{
         String checkString = currentState + "," + symbol;
         if (this.transitions.containsKey(checkString)){
             Vector<String> temp = this.transitions.get(checkString);
-            for (int i=0; i<temp.size();i++){
-                String posState = temp.get(i);
-                if (callNFABT(idx+ 1,inputStr,posState)){
-                    return true;
+            if (temp != null) {
+                for (int i = 0; i < temp.size(); i++){
+                    String posState = temp.get(i);
+                    if (callNFABT(idx + 1, inputStr, posState)){
+                        return true;
+                    }
                 }
             }
         }

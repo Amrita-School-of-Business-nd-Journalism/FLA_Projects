@@ -13,30 +13,29 @@ public class IntersectionDFA {
         System.out.println("---------- For DFA - 1 ----------");
 
         System.out.print("Enter the initial state: ");
-        String initialState1 = scanner.nextLine();
+        String initialState1 = scanner.nextLine().trim();
 
         System.out.print("Enter the number of final states: ");
-        temp = scanner.nextInt();
-        scanner.nextLine();
+        temp = Integer.parseInt(scanner.nextLine().trim());
 
         Set<String> finalState1 = new HashSet<>();
         for (int i = 0; i < temp; i++) {
-            finalState1.add(scanner.nextLine());
+            System.out.print((i + 1) + " Enter final state: ");
+            finalState1.add(scanner.nextLine().trim());
         }
 
         Set<String> tsym = new HashSet<>();
         Map<String, Map<String, String>> transitions1 = new HashMap<>();
 
         System.out.print("Enter the number of transitions: ");
-        temp = scanner.nextInt();
-        scanner.nextLine();
+        temp = Integer.parseInt(scanner.nextLine().trim());
         for (int i = 0; i < temp; i++) {
-            System.out.print(i + 1 + " - Enter source state: ");
-            String state1 = scanner.nextLine();
-            System.out.print(i + 1 + " - Enter destination state: ");
-            String state2 = scanner.nextLine();
-            System.out.print(i + 1 + " - Enter the transition symbol: ");
-            String symbol = scanner.nextLine();
+            System.out.print(i + 1 + " Enter source state: ");
+            String state1 = scanner.nextLine().trim();
+            System.out.print(i + 1 + " Enter destination state: ");
+            String state2 = scanner.nextLine().trim();
+            System.out.print(i + 1 + " Enter the transition symbol: ");
+            String symbol = scanner.nextLine().trim();
 
             tsym.add(symbol);
             transitions1.putIfAbsent(state1, new HashMap<>());
@@ -46,29 +45,28 @@ public class IntersectionDFA {
         System.out.println("---------- For DFA - 2 ----------");
 
         System.out.print("Enter the initial state: ");
-        String initialState2 = scanner.nextLine();
+        String initialState2 = scanner.nextLine().trim();
 
         System.out.print("Enter the number of final states: ");
-        temp = scanner.nextInt();
-        scanner.nextLine();
+        temp = Integer.parseInt(scanner.nextLine().trim());
 
         Set<String> finalState2 = new HashSet<>();
         for (int i = 0; i < temp; i++) {
-            finalState2.add(scanner.nextLine());
+            System.out.print((i + 1) + " Enter final state: ");
+            finalState2.add(scanner.nextLine().trim());
         }
 
         Map<String, Map<String, String>> transitions2 = new HashMap<>();
 
         System.out.print("Enter the number of transitions: ");
-        temp = scanner.nextInt();
-        scanner.nextLine();
+        temp = Integer.parseInt(scanner.nextLine().trim());
         for (int i = 0; i < temp; i++) {
-            System.out.print(i + 1 + " - Enter source state: ");
-            String state1 = scanner.nextLine();
-            System.out.print(i + 1 + " - Enter destination state: ");
-            String state2 = scanner.nextLine();
-            System.out.print(i + 1 + " - Enter the transition symbol: ");
-            String symbol = scanner.nextLine();
+            System.out.print(i + 1 + " Enter source state: ");
+            String state1 = scanner.nextLine().trim();
+            System.out.print(i + 1 + " Enter destination state: ");
+            String state2 = scanner.nextLine().trim();
+            System.out.print(i + 1 + " Enter the transition symbol: ");
+            String symbol = scanner.nextLine().trim();
 
             tsym.add(symbol);
             transitions2.putIfAbsent(state1, new HashMap<>());

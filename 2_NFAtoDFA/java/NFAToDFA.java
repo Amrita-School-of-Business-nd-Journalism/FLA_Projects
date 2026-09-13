@@ -12,34 +12,32 @@ public class NFAToDFA {
         
         //inital state
         System.out.print("Enter the inital state of the NFA: ");
-        String initialState = scanner.nextLine();
+        String initialState = scanner.nextLine().trim();
 
         int temp;
         //final states
         System.out.print("Enter number of final states in the NFA: ");
-        temp = scanner.nextInt();
-        scanner.nextLine(); 
+        temp = Integer.parseInt(scanner.nextLine().trim());
 
         Set<String> finalStates = new HashSet<>();
         for(int i=0;i<temp;i++){
             System.out.print(i+1 + " Enter final state: ");
-            finalStates.add(scanner.nextLine());
+            finalStates.add(scanner.nextLine().trim());
         }
 
         //transitions
         Map<String,Map<String,Set<String>>> nfaTransitions = new HashMap<>();
         Set<String> tsym = new HashSet<>();
         System.out.print("Enter number of transitions in the NFA: ");
-        temp = scanner.nextInt();
-        scanner.nextLine();
+        temp = Integer.parseInt(scanner.nextLine().trim());
 
         for (int i=0;i<temp;i++){
             System.out.print(i+1 + " Enter state -1: ");
-            String state1 = scanner.nextLine();
+            String state1 = scanner.nextLine().trim();
             System.out.print(i+1 + " Enter state -2: ");
-            String state2 = scanner.nextLine();
+            String state2 = scanner.nextLine().trim();
             System.out.print(i+1 + " Enter transition: ");
-            String symbol = scanner.nextLine();
+            String symbol = scanner.nextLine().trim();
 
             tsym.add(symbol);
             nfaTransitions.putIfAbsent(state1, new HashMap<>());
