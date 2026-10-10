@@ -1,10 +1,11 @@
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.Vector;
-
 
 /*
 public class Automata_Java {
@@ -14,14 +15,14 @@ public class Automata_Java {
             char symbol = inputstr.charAt(i);
             String check_string = current_state + "," + symbol;
             if (transitions.containsKey(check_string)){
-                current_state = transitions.get(check_string);
+        System.out.println("Enter number of transitions:");
             } else {
                 return false;
-            }
+            System.out.println(i+1 + " Enter state -1: ");
         }
-        return finalStates.contains(current_state);
+            System.out.println(i+1 + " Enter state -2: ");
     }
-
+            System.out.println(i+1 + " Enter transition Symbol:");
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Enter the inital state: ");
@@ -31,19 +32,19 @@ public class Automata_Java {
         Set<String> final_state = new HashSet<>();
         for(int i=0;i<temp;i++){
             System.out.print(i+1 + " Enter final state: ");
-            final_state.add(scanner.nextLine());
+        System.out.println("Enter number of transitions:");
         }
 
-        Map<String, String> transitions = new HashMap<>();
+            System.out.println(i+1 + " Enter state -1:");
         System.out.print("Enter number of transitions: ");
-        int temp2 = Integer.parseInt(scanner.nextLine());
+            System.out.println(i+1 + " Enter transition Symbol:");
         for(int i=0;i<temp2;i++){
             System.out.print(i+1 + " Enter state -1: ");
             String state1 = scanner.nextLine();
             System.out.print(i+1 + " Enter state -2: ");
             String state2 = scanner.nextLine();
             System.out.print(i+1 + " Enter transition: ");
-            String tsym = scanner.nextLine();
+                System.out.println(j+1 + " Enter the state to which it can transition:");
             transitions.put(state1 + "," + tsym, state2);
         }
 
@@ -54,7 +55,7 @@ public class Automata_Java {
             System.out.println(inputstr +" is accepted by the DFA.");
         } else {
             System.out.println(inputstr +" is not accepted by the DFA.");
-        }   
+            System.out.println("Enter the string to be checked:");
     }
 
     public static boolean NFA_Automata(int idx,String inputStr,String current,Map<String, Vector<String>> transitions,Set<String> finalStates) {
@@ -80,74 +81,66 @@ public class Automata_Java {
 
 
 public class DFANFAAutomata{
-    public static void main(String[] args){
-        Scanner scanner = new Scanner(System.in);
+    public static void main(String[] args) throws FileNotFoundException{
+        try (Scanner scanner = args.length > 0? new Scanner(new File(args[0])): new Scanner(System.in)) {
 
-        // Common things 
-        System.out.print("Enter the inital state: ");
-        String initialState = scanner.nextLine().trim();
-    
-        System.out.print("Enter number of final states: ");
-        int temp = Integer.parseInt(scanner.nextLine().trim());
-        Set<String> finalStates = new HashSet<>();
-        for(int i=0;i<temp;i++){
-            System.out.print(i+1 + " Enter final state: ");
-            finalStates.add(scanner.nextLine().trim());
-        }
-        //Common thigns over 
+            System.out.println("Enter the initial state:");
+            String initialState = scanner.nextLine().trim();
 
-        System.out.println("For DFA things: ");
-        // DFA inputs
-        Map<String, String> DFAtransitions = new HashMap<>();
-        System.out.print("Enter number of transitions: ");
-        int DFAtemp1 = Integer.parseInt(scanner.nextLine().trim());
-        for(int i=0;i<DFAtemp1;i++){
-            System.out.print(i+1 + " Enter state -1: ");
-            String DFAstate1 = scanner.nextLine().trim();
-            System.out.print(i+1 + " Enter state -2: ");
-            String DFAstate2 = scanner.nextLine().trim();
-            System.out.print(i+1 + " Enter transition Symbol: ");
-            String DFAtsym = scanner.nextLine().trim();
-            DFAtransitions.put(DFAstate1 + "," + DFAtsym, DFAstate2);
-        }
-
-        OverallThings DFAobj = new DFA(initialState,finalStates,DFAtransitions);
-
-        // NFA inputs
-        System.out.println("For NFA things: ");
-        Map<String, Vector<String>> NFAtransitions = new HashMap<>();
-        System.out.print("Enter number of transitions: ");
-        int NFAtemp1 = Integer.parseInt(scanner.nextLine().trim());
-        for(int i=0;i<NFAtemp1;i++){
-            System.out.print(i+1 + " Enter state -1: ");
-            String NFAstate1 = scanner.nextLine().trim();
-            System.out.print(i+1 + " Enter transition Symbol: ");
-            String NFAtsym = scanner.nextLine().trim();
-            
-            System.out.println("Enter the number of state(s) it can transistion to: ");
-            int NFAtemp2 = Integer.parseInt(scanner.nextLine().trim());
-            Vector<String> tostatestemp = new Vector<>();
-            for(int j=0;j<NFAtemp2;j++){
-                System.out.print(j+1 + " Enter the state to which it can transition: ");
-                tostatestemp.add(scanner.nextLine().trim());
+            System.out.println("Enter number of final states:");
+            int temp = Integer.parseInt(scanner.nextLine().trim());
+            Set<String> finalStates = new HashSet<>();
+            for (int i = 0; i < temp; i++) {
+                System.out.println((i + 1) + " Enter final state:");
+                finalStates.add(scanner.nextLine().trim());
             }
 
-            NFAtransitions.put(NFAstate1 + "," + NFAtsym, tostatestemp);
-        }
-
-        OverallThings NFAobj = new NFA(initialState,finalStates,NFAtransitions);
-
-        // Input string
-        while(true){
-            System.out.print("Enter the string to be checked: ");
-            String inputStr = scanner.nextLine();
-            if (inputStr.trim().equalsIgnoreCase("exit")){
-                break;
+            System.out.println("For DFA things:");
+            Map<String, String> dfaTransitions = new HashMap<>();
+            System.out.println("Enter number of transitions:");
+            int dfaTransitionCount = Integer.parseInt(scanner.nextLine().trim());
+            for (int i = 0; i < dfaTransitionCount; i++) {
+                System.out.println((i+ 1)+" Enter state -1:");
+                String dfaState1 = scanner.nextLine().trim();
+                System.out.println((i+1) +" Enter state -2:");
+                String dfaState2 = scanner.nextLine().trim();
+                System.out.println((i+1)+" Enter transition symbol:");
+                String dfaSymbol = scanner.nextLine().trim();
+                dfaTransitions.put(dfaState1+","+dfaSymbol,dfaState2);
             }
-            // Calling and printing the output
-            System.out.println("DFA result is: " + DFAobj.FAcompute(inputStr));
-            System.out.println("NFA result is: " +  NFAobj.FAcompute(inputStr));
+
+            OverallThings dfa = new DFA(initialState, finalStates, dfaTransitions);
+
+            System.out.println("For NFA things:");
+            Map<String, Vector<String>> nfaTransitions = new HashMap<>();
+            System.out.println("Enter number of transitions:");
+            int nfaTransitionCount = Integer.parseInt(scanner.nextLine().trim());
+            for (int i = 0; i < nfaTransitionCount; i++) {
+                System.out.println((i +1)+" Enter state -1:");
+                String nfaState = scanner.nextLine().trim();
+                System.out.println((i+1)+" Enter transition symbol:");
+                String nfaSymbol = scanner.nextLine().trim();
+                System.out.println("Enter the number of states it can transition to:");
+                int destinationCount = Integer.parseInt(scanner.nextLine().trim());
+                Vector<String> destinations = new Vector<>();
+                for (int j = 0; j < destinationCount; j++) {
+                    System.out.println((j+1) + "Enter the destination state:");
+                    destinations.add(scanner.nextLine().trim());
+                }
+                nfaTransitions.put(nfaState + "," + nfaSymbol, destinations);
+            }
+
+            OverallThings nfa = new NFA(initialState, finalStates, nfaTransitions);
+
+            while (true) {
+                System.out.println("Enter the string to be checked:");
+                String input = scanner.nextLine();
+                if (input.trim().equalsIgnoreCase("exit")) {
+                    break;
+                }
+                System.out.println("DFA result is: " + dfa.FAcompute(input));
+                System.out.println("NFA result is: " + nfa.FAcompute(input));
+            }
         }
-        scanner.close();
     }
 }

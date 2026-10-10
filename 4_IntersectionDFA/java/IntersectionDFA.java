@@ -1,3 +1,5 @@
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -6,66 +8,63 @@ import java.util.Set;
 
 public class IntersectionDFA {
 
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in); 
+    public static void main(String[] args) throws FileNotFoundException {
+        try (Scanner scanner = args.length > 0? new Scanner(new File(args[0])): new Scanner(System.in)) {
         int temp;
-
-        System.out.println("---------- For DFA - 1 ----------");
-
-        System.out.print("Enter the initial state: ");
+        System.out.println("DFA-1");
+        System.out.println("Enter the initial state:");
         String initialState1 = scanner.nextLine().trim();
 
-        System.out.print("Enter the number of final states: ");
+        System.out.println("Enter the number of final states:");
         temp = Integer.parseInt(scanner.nextLine().trim());
 
         Set<String> finalState1 = new HashSet<>();
         for (int i = 0; i < temp; i++) {
-            System.out.print((i + 1) + " Enter final state: ");
+            System.out.println((i + 1) + " Enter final state:");
             finalState1.add(scanner.nextLine().trim());
         }
 
         Set<String> tsym = new HashSet<>();
         Map<String, Map<String, String>> transitions1 = new HashMap<>();
 
-        System.out.print("Enter the number of transitions: ");
+        System.out.println("Enter the number of transitions:");
         temp = Integer.parseInt(scanner.nextLine().trim());
         for (int i = 0; i < temp; i++) {
-            System.out.print(i + 1 + " Enter source state: ");
+            System.out.println(i + 1 + " Enter source state:");
             String state1 = scanner.nextLine().trim();
-            System.out.print(i + 1 + " Enter destination state: ");
+            System.out.println(i + 1 + " Enter destination state:");
             String state2 = scanner.nextLine().trim();
-            System.out.print(i + 1 + " Enter the transition symbol: ");
+            System.out.println(i + 1 + " Enter the transition symbol:");
             String symbol = scanner.nextLine().trim();
 
             tsym.add(symbol);
             transitions1.putIfAbsent(state1, new HashMap<>());
             transitions1.get(state1).put(symbol, state2);
         }
-
-        System.out.println("---------- For DFA - 2 ----------");
-
-        System.out.print("Enter the initial state: ");
+        System.out.println("DFA-2");
+        
+        System.out.println("Enter the initial state:");
         String initialState2 = scanner.nextLine().trim();
 
-        System.out.print("Enter the number of final states: ");
+        System.out.println("Enter the number of final states:");
         temp = Integer.parseInt(scanner.nextLine().trim());
 
         Set<String> finalState2 = new HashSet<>();
         for (int i = 0; i < temp; i++) {
-            System.out.print((i + 1) + " Enter final state: ");
+            System.out.println((i + 1) + " Enter final state:");
             finalState2.add(scanner.nextLine().trim());
         }
 
         Map<String, Map<String, String>> transitions2 = new HashMap<>();
 
-        System.out.print("Enter the number of transitions: ");
+        System.out.println("Enter the number of transitions:");
         temp = Integer.parseInt(scanner.nextLine().trim());
         for (int i = 0; i < temp; i++) {
-            System.out.print(i + 1 + " Enter source state: ");
+            System.out.println(i + 1 + " Enter source state:");
             String state1 = scanner.nextLine().trim();
-            System.out.print(i + 1 + " Enter destination state: ");
+            System.out.println(i + 1 + " Enter destination state:");
             String state2 = scanner.nextLine().trim();
-            System.out.print(i + 1 + " Enter the transition symbol: ");
+            System.out.println(i + 1 + " Enter the transition symbol:");
             String symbol = scanner.nextLine().trim();
 
             tsym.add(symbol);
@@ -79,6 +78,6 @@ public class IntersectionDFA {
 
             IntersectionDFABase.printDFA(result.initialState, result.transitions, result.finalStates);
 
-            scanner.close();
+        }
     }
 }

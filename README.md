@@ -14,6 +14,7 @@ A practical collection of core **Formal Languages and Automata Theory (FLA)** al
 | **2** | [2_NFAtoDFA/](2_NFAtoDFA/) | NFA to DFA conversion (Subset Construction) | [Java](2_NFAtoDFA/java/) | [Jupyter](2_NFAtoDFA/python/NFAtoDFA.ipynb) |
 | **3** | [3_OptimiseDFA/](3_OptimiseDFA/) | DFA Minimisation (Unreachable elimination + Partition refinement) | [Java](3_OptimiseDFA/java/) | [Jupyter](3_OptimiseDFA/python/DFAReduction.ipynb) |
 | **4** | [4_IntersectionDFA/](4_IntersectionDFA/) | Product DFA Intersection ($M_1 \cap M_2$) | [Java](4_IntersectionDFA/java/) | [Jupyter](4_IntersectionDFA/python/intersectionDFA.ipynb) |
+| **5** | [5_PDASimulation/](5_PDASimulation/) | Pushdown Automaton simulation | [Java](5_PDASimulation/java/) | [Jupyter](5_PDASimulation/python/PDASimualtion.ipynb) |
 
 ---
 
@@ -24,18 +25,27 @@ A practical collection of core **Formal Languages and Automata Theory (FLA)** al
 │   ├── java/                   # DFA & NFA simulation base classes & runner
 │   ├── python/                 # Automata simulation Jupyter notebook
 │   └── compiledFinalJava/      # Compiled Java bytecode (.class)
+│   └── input.txt               # Example file input
 ├── 2_NFAtoDFA/
 │   ├── java/                   # Subset construction base & runner
 │   ├── python/                 # NFA to DFA conversion Jupyter notebook
 │   └── compiledFinalJava/      # Compiled Java bytecode (.class)
+│   └── input.txt               # Example file input
 ├── 3_OptimiseDFA/
 │   ├── java/                   # DFA reduction base & runner
 │   ├── python/                 # DFA reduction Jupyter notebook
 │   └── compiledFinalJava/      # Compiled Java bytecode (.class)
+│   └── input.txt               # Example file input
 ├── 4_IntersectionDFA/
 │   ├── java/                   # DFA intersection product base & runner
 │   ├── python/                 # DFA intersection Jupyter notebook
 │   └── compiledFinalJava/      # Compiled Java bytecode (.class)
+│   └── input.txt               # Example file input
+├── 5_PDASimulation/
+│   ├── java/                   # PDA simulation base class & runner
+│   ├── python/                 # PDA simulation Jupyter notebook
+│   ├── compiledFinalJava/      # Compiled Java bytecode (.class)
+│   └── input.txt               # Example file input
 └── README.md                   # Repository documentation
 ```
 
@@ -58,6 +68,9 @@ javac -d 3_OptimiseDFA/compiledFinalJava 3_OptimiseDFA/java/*.java
 
 # 4. DFA Intersection
 javac -d 4_IntersectionDFA/compiledFinalJava 4_IntersectionDFA/java/*.java
+
+# 5. PDA Simulation
+javac -d 5_PDASimulation/compiledFinalJava 5_PDASimulation/java/*.java
 ```
 
 ### 2. Run any project
@@ -82,6 +95,20 @@ javac -d 4_IntersectionDFA/compiledFinalJava 4_IntersectionDFA/java/*.java
   java -cp 4_IntersectionDFA/compiledFinalJava IntersectionDFA
   ```
 
+- **Run PDA Simulation:**
+  ```bash
+  java -cp 5_PDASimulation/compiledFinalJava PDASimulation
+  ```
+
+### File input
+
+All Java runners accept an optional input filename. Without a filename they continue using interactive console input. With a filename, values are read one per line in the same order as the interactive prompts:
+
+```bash
+java -cp 2_NFAtoDFA/compiledFinalJava NFAToDFA
+java -cp 5_PDASimulation/compiledFinalJava PDASimulation 5_PDASimulation/input.txt
+```
+
 ---
 
 ## Quick Start (Python)
@@ -96,6 +123,7 @@ Navigate to any project directory and open the corresponding notebook:
 - `2_NFAtoDFA/python/NFAtoDFA.ipynb`
 - `3_OptimiseDFA/python/DFAReduction.ipynb`
 - `4_IntersectionDFA/python/intersectionDFA.ipynb`
+- `5_PDASimulation/python/PDASimualtion.ipynb`
 
 ---
 
@@ -120,6 +148,11 @@ Navigate to any project directory and open the corresponding notebook:
 - Identifies product state reachability via BFS queue traversal.
 - Defines accepting states as $(q_1, q_2)$ where $q_1 \in F_1 \land q_2 \in F_2$.
 
+### 5. PDA Simulation (`5_PDASimulation`)
+- Simulates a nondeterministic pushdown automaton using recursive backtracking.
+- Supports input-consuming transitions and epsilon transitions.
+- Updates the stack by popping its top symbol and pushing the supplied string.
+- Accepts when the input is consumed and the current state is final or the stack is empty.
 ---
 
 ## License

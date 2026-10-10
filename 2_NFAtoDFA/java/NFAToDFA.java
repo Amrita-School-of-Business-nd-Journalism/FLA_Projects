@@ -1,3 +1,5 @@
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -7,36 +9,36 @@ import java.util.Set;
 
 
 public class NFAToDFA {
-    public static void main(String[] args){
-        Scanner scanner = new Scanner(System.in);
+    public static void main(String[] args) throws FileNotFoundException{
+        try (Scanner scanner = args.length > 0? new Scanner(new File(args[0])): new Scanner(System.in)) {
         
         //inital state
-        System.out.print("Enter the inital state of the NFA: ");
+        System.out.println("Enter the initial state of the NFA:");
         String initialState = scanner.nextLine().trim();
 
         int temp;
         //final states
-        System.out.print("Enter number of final states in the NFA: ");
+        System.out.println("Enter number of final states in the NFA:");
         temp = Integer.parseInt(scanner.nextLine().trim());
 
         Set<String> finalStates = new HashSet<>();
         for(int i=0;i<temp;i++){
-            System.out.print(i+1 + " Enter final state: ");
+            System.out.println(i+1 + " Enter final state:");
             finalStates.add(scanner.nextLine().trim());
         }
 
         //transitions
         Map<String,Map<String,Set<String>>> nfaTransitions = new HashMap<>();
         Set<String> tsym = new HashSet<>();
-        System.out.print("Enter number of transitions in the NFA: ");
+        System.out.println("Enter number of transitions in the NFA:");
         temp = Integer.parseInt(scanner.nextLine().trim());
 
         for (int i=0;i<temp;i++){
-            System.out.print(i+1 + " Enter state -1: ");
+            System.out.println(i+1 + " Enter state -1:");
             String state1 = scanner.nextLine().trim();
-            System.out.print(i+1 + " Enter state -2: ");
+            System.out.println(i+1 + " Enter state -2:");
             String state2 = scanner.nextLine().trim();
-            System.out.print(i+1 + " Enter transition: ");
+            System.out.println(i+1 + " Enter transition:");
             String symbol = scanner.nextLine().trim();
 
             tsym.add(symbol);
@@ -50,6 +52,6 @@ public class NFAToDFA {
         //printing the states and transistions of the DFA
         NFAToDFAConvert.printDFA(initialState, dfaTransitions, finalStates);
 
-        scanner.close();
+        }
     }
 }

@@ -1,3 +1,5 @@
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -8,37 +10,38 @@ import java.util.Set;
 
 public class PDASimulation {
 
-    public static void main(String[] args) {
-        try (Scanner scanner = new Scanner(System.in)) {
+    public static void main(String[] args) throws FileNotFoundException {
+        Scanner scanner = args.length > 0? new Scanner(new File(args[0])): new Scanner(System.in);
+        try (scanner) {
             List<String> stack = new ArrayList<>();
             stack.add("z");
 
-            System.out.print("Enter the initial state: ");
+            System.out.println("Enter the initial state:");
             String initialState = scanner.nextLine().trim();
 
-            System.out.print("Enter the number of final states: ");
+            System.out.println("Enter the number of final states:");
             int temp = Integer.parseInt(scanner.nextLine().trim());
 
             Set<String> finalStates = new HashSet<>();
             for (int i = 0; i < temp; i++) {
-                System.out.print((i + 1) + "-Enter the final state: ");
+                System.out.println((i + 1) + "-Enter the final state:");
                 finalStates.add(scanner.nextLine().trim());
             }
 
             Map<String, List<String[]>> transitions = new HashMap<>();
-            System.out.print("Enter the number of transitions: ");
+            System.out.println("Enter the number of transitions:");
             temp = Integer.parseInt(scanner.nextLine().trim());
 
             for (int i = 0; i < temp; i++) {
-                System.out.print((i + 1) + "-Enter the current state: ");
+                System.out.println((i + 1) + "-Enter the current state:");
                 String state1 = scanner.nextLine().trim();
-                System.out.print((i + 1) + "-Enter the transition symbol: ");
+                System.out.println((i + 1) + "-Enter the transition symbol:");
                 String transitionSymbol = scanner.nextLine().trim();
-                System.out.print((i + 1) + "-Enter the top of stack symbol: ");
+                System.out.println((i + 1) + "-Enter the top of stack symbol:");
                 String topStack = scanner.nextLine().trim();
-                System.out.print((i + 1) + "-Enter the next state: ");
+                System.out.println((i + 1) + "-Enter the next state:");
                 String state2 = scanner.nextLine().trim();
-                System.out.print((i + 1) + "-Enter the symbol to push onto stack: ");
+                System.out.println((i + 1) + "-Enter the symbol to push onto stack:");
                 String pushSymbol = scanner.nextLine().trim();
 
                 String key = state1 + "," + transitionSymbol + "," + topStack;
@@ -46,7 +49,7 @@ public class PDASimulation {
                 transitions.get(key).add(new String[]{state2, pushSymbol});
             }
 
-            System.out.print("Enter the input string: ");
+            System.out.println("Enter the input string:");
             String inputString = scanner.nextLine();
 
             if (PDASimulationBase.pda(0, inputString, initialState,
