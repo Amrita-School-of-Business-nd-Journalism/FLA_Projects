@@ -149,9 +149,7 @@ Navigate to any project directory and open the corresponding notebook:
 - Defines accepting states as $(q_1, q_2)$ where $q_1 \in F_1 \land q_2 \in F_2$.
 
 ### 5. PDA Simulation (`5_PDASimulation`)
-- Simulates a nondeterministic pushdown automaton using recursive backtracking.
-- Supports input-consuming transitions and epsilon transitions.
-- Updates the stack by popping its top symbol and pushing the supplied string.
+- Simulates a pushdown automaton using recursive backtracking.
 - Accepts when the input is consumed and the current state is final or the stack is empty.
 ---
 
